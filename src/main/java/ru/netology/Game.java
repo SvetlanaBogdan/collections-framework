@@ -1,17 +1,19 @@
 package ru.netology;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 // Класс Game — управляет турниром игроков
 public class Game {
 
-    // Список зарегистрированных игроков
-    private List<Player> players = new ArrayList<>();
+    // Храним игроков в HashMap для быстрого поиска по имени
+    private Map<String, Player> players = new HashMap<>();
 
-    // Метод регистрации игрока в турнире
+    // Регистрируем игрока по его имени
     public void register(Player player) {
-        players.add(player);
+        players.put(player.getName(), player);
     }
 
     // Метод проведения раунда между двумя игроками
@@ -44,11 +46,11 @@ public class Game {
 
     // Метод поиска игрока по имени среди зарегистрированных
     public Player findByName(String name) {
-        for (Player player : players) {
-            if (player.getName().equals(name)) {
-                return player;
-            }
-        }
-        return null;
+
+        // Получаем игрока по имени из HashMap
+        Player player = players.get(name);
+
+        // Возвращаем найденного игрока (или null если нет)
+        return player;
     }
-}
+    }
